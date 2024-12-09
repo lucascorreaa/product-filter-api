@@ -15,22 +15,29 @@ async function fetchProducts() {
 }
 
 // função para exibir produtos
-filteredProducts.forEach((product) => {
-    const productElement = document.createElement("div");
-    productElement.className = "product";
-
-    productElement.innerHTML = `
-      <img src="${product.image}" alt="${product.title}" />
-      <div class="product-details">
-        <strong>${product.title}</strong>
-        <span>Categoria: ${product.category}</span>
-        <span>Preço: $${product.price.toFixed(2)}</span>
-      </div>
-    `;
-
-    productList.appendChild(productElement);
-  });
-}
+function displayProducts(filteredProducts) {
+    productList.innerHTML = ""
+    if (filteredProducts.length === 0) {
+      productList.innerHTML = "<p>Nenhum produto encontrado.</p>"
+      return;
+    }
+  
+    filteredProducts.forEach((product) => {
+      const productElement = document.createElement("div")
+      productElement.className = "product"
+  
+      productElement.innerHTML = `
+        <img src="${product.image}" alt="${product.title}" />
+        <div class="product-details">
+          <strong>${product.title}</strong>
+          <span>Categoria: ${product.category}</span>
+          <span>Preço: $${product.price.toFixed(2)}</span>
+        </div>
+      `
+  
+      productList.appendChild(productElement)
+    })
+  }
 
 filterInput.addEventListener('input', () => {
     const searchTerm = filterInput.value.toLowerCase()
